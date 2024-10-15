@@ -1,6 +1,6 @@
 ﻿namespace BicycleRent.Domain;
 /// <summary>
-/// Bicycle avalible for rent
+/// Bicycle available for rent
 /// </summary>
 public class Bicycle
 {

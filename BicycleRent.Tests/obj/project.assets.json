@@ -5529,11 +5529,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Tests\\BicycleRent.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Tests\\BicycleRent.Tests.csproj",
       "projectName": "BicycleRent.Tests",
-      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Tests\\BicycleRent.Tests.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Tests\\BicycleRent.Tests.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Tests\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5550,8 +5550,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj"
+            "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {
+              "projectPath": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj"
             }
           }
         }

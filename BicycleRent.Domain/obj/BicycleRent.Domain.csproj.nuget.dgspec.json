@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {}
+    "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {
+    "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj",
         "projectName": "BicycleRent.Domain",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\BicycleRent.Domain.csproj",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\BicycleRent.Domain.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\BicycleRent\\BicycleRent.Domain\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\enterprise-development\\BicycleRent.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
