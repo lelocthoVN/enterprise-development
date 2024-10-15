@@ -11,8 +11,8 @@ public class BicycleRentData
     // Constructor to initialize data
     public BicycleRentData()
     {
-        Bicycles = new List<Bicycle>()
-        {
+        Bicycles =
+        [
             new Bicycle { SerialNumber = "B00", Color = "Orange", Model = "TXJ01", TypeId = 0 },
             new Bicycle { SerialNumber = "B01", Color = "Red", Model = "ETO90", TypeId = 1 },
             new Bicycle { SerialNumber = "B02", Color = "Blue", Model = "SAM878", TypeId = 2 },
@@ -21,10 +21,10 @@ public class BicycleRentData
             new Bicycle { SerialNumber = "B05", Color = "Green", Model = "WMR117", TypeId = 0 },
             new Bicycle { SerialNumber = "B06", Color = "Black", Model = "LPI635", TypeId = 0 },
             new Bicycle { SerialNumber = "B07", Color = "Yellow", Model = "YUI475", TypeId = 2 }
-        };
+        ];
 
-        Customers = new List<Customer>()
-        {
+        Customers = 
+        [
             new Customer { Id = 0, FullName = "Varro Buckley", BirthDate = new DateTime(1970, 7, 20), PhoneNumber = "+7 908 312 58 50" },
             new Customer { Id = 1, FullName = "Poetelius Parkinson", BirthDate = new DateTime(1984, 11, 14), PhoneNumber = "+7 908 216 48 93" },
             new Customer { Id = 2, FullName = "Orthaeus Winchester", BirthDate = new DateTime(2001, 3, 30), PhoneNumber = "+7 907 511 63 89" },
@@ -33,17 +33,17 @@ public class BicycleRentData
             new Customer { Id = 5, FullName = "Agamedes Rouche", BirthDate = new DateTime(1999, 12, 21), PhoneNumber = "+7 905 041 32 61" },
             new Customer { Id = 6, FullName = "Ianessa Luders", BirthDate = new DateTime(1975, 9, 18), PhoneNumber = "+7 962 602 41 83" },
             new Customer { Id = 7, FullName = "Sophokles Mach", BirthDate = new DateTime(1986, 10, 16), PhoneNumber = "+7 908 216 18 97" }
-        };
+        ];
 
-        Types = new List<BicycleType>()
-        {
+        Types =
+        [
             new BicycleType { Id = 0, RentalPrice = 500, TypeName = "Sport" },
             new BicycleType { Id = 1, RentalPrice = 650, TypeName = "Mountain" },
             new BicycleType { Id = 2, RentalPrice = 450, TypeName = "Walking" }
-        };
+        ];
 
-        Rentals = new List<Rental>()
-        {
+        Rentals =
+        [
             new Rental { Customer = Customers[7], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 20, 18, 31, 0), End = new DateTime(2023, 9, 20, 20, 0, 0) },
             new Rental { Customer = Customers[7], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 27, 17, 30, 0), End = new DateTime(2023, 9, 27, 19, 0, 0) },
             new Rental { Customer = Customers[0], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 13, 17, 24, 0), End = new DateTime(2023, 9, 13, 19, 30, 0) },
@@ -71,6 +71,6 @@ public class BicycleRentData
             new Rental { Customer = Customers[5], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 21, 15, 31, 0), End = new DateTime(2023, 9, 21, 16, 0, 0) },
             new Rental { Customer = Customers[6], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 22, 13, 31, 0), End = new DateTime(2023, 9, 22, 15, 0, 0) },
             new Rental { Customer = Customers[5], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 1, 12, 31, 0), End = new DateTime(2023, 9, 1, 13, 0, 0) }
-        };
+        ];
     }
 };
