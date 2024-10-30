@@ -1,8 +1,6 @@
-﻿namespace BicycleRent.Domain;
-/// <summary>
-/// Bicycle available for rent
-/// </summary>
-public class Bicycle
+﻿namespace BicycleRent.Server.Dto;
+
+public class BicycleDto
 {
     /// <summary>
     /// Bicycle's serial number

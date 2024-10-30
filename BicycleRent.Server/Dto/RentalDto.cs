@@ -1,13 +1,9 @@
-﻿namespace BicycleRent.Domain;
-/// <summary>
-/// Class that represents specific rental operation
-/// </summary>
-public class Rental
+﻿using BicycleRent.Domain;
+
+namespace BicycleRent.Server.Dto;
+
+public class RentalDto
 {
-    /// <summary>
-    /// Rental ID
-    /// </summary>
-    public required int Id { get; set; }
     /// <summary>
     /// The rented bicycle
     /// </summary>
@@ -24,4 +20,5 @@ public class Rental
     /// End time of the rental
     /// </summary>
     public required DateTime End { get; set; }
+
 }
