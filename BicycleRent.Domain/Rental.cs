@@ -1,4 +1,5 @@
 ﻿namespace BicycleRent.Domain;
+
 /// <summary>
 /// Class that represents specific rental operation
 /// </summary>

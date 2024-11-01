@@ -4,7 +4,7 @@ namespace BicycleRent.Domain.Repositories;
 
 public class CustomerRepository : IRepository<Customer, int>
 {
-    private static readonly List<Customer> _customers = new List<Customer>();
+    private static readonly List<Customer> _customers = [];
     private static int _nextId = 0;
 
     /// <summary>

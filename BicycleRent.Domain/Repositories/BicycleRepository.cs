@@ -14,16 +14,16 @@ public class BicycleRepository : IRepository<Bicycle, string>
     /// <summary>
     /// Get a bicycle by its serial number
     /// </summary>
-    /// <param name="serial_number">The serial number of the bicycle</param>
-    public Bicycle? GetById(string serial_number) => _bicycles.FirstOrDefault(x => x.SerialNumber == serial_number);
+    /// <param name="serialNumber">The serial number of the bicycle</param>
+    public Bicycle? GetById(string serialNumber) => _bicycles.FirstOrDefault(x => x.SerialNumber == serialNumber);
 
     /// <summary>
     /// Delete a bicycle by its serial number
     /// </summary>
-    /// <param name="serial_number">The serial number of the bicycle</param>
-    public bool Delete(string serial_number)
+    /// <param name="serialNumber">The serial number of the bicycle</param>
+    public bool Delete(string serialNumber)
     {
-        var bicycle = GetById(serial_number);
+        var bicycle = GetById(serialNumber);
         if (bicycle == null)
         {
             return false;
@@ -36,10 +36,10 @@ public class BicycleRepository : IRepository<Bicycle, string>
     /// Update a bicycle's information
     /// </summary>
     /// <param name="entity">The bicycle entity with updated information</param>
-    /// <param name="serial_number">The serial number of the bicycle to update</param>
-    public bool Update(Bicycle entity, string serial_number)
+    /// <param name="serialNumber">The serial number of the bicycle to update</param>
+    public bool Update(Bicycle entity, string serialNumber)
     {
-        var existingBicycle = GetById(serial_number);
+        var existingBicycle = GetById(serialNumber);
         if (existingBicycle == null)
         {
             return false;

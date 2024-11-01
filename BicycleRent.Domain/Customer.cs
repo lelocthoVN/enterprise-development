@@ -1,4 +1,5 @@
 ﻿namespace BicycleRent.Domain;
+
 /// <summary>
 /// Class customer information for bicycle rental
 /// </summary>

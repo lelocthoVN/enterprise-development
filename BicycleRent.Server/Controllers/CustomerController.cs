@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BicycleRent.Server.Controllers;
 
+/// <summary>
+/// Controller to manage the operation of the customers
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class CustomerController(IRepository<Customer, int> repository, IMapper mapper) : ControllerBase

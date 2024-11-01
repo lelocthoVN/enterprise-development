@@ -2,6 +2,9 @@
 
 namespace BicycleRent.Server.Dto;
 
+/// <summary>
+/// DTO class for representing the rentals
+/// </summary>
 public class RentalDto
 {
     /// <summary>

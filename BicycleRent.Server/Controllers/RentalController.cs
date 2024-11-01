@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BicycleRent.Server.Controllers;
 
+/// <summary>
+/// Controller for managing operations to rentals
+/// </summary>
 [Route("api/[controller]")]
 [ApiController]
 public class RentalController(IRepository<Rental, int> repository, IMapper mapper) : ControllerBase
