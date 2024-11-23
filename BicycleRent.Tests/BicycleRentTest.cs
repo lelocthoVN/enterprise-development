@@ -46,9 +46,9 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
     [Fact]
     public void TestBicycleTimeRents()
     {
-        var typeRentTime = fixture.Rentals
-                .Join(fixture.Bicycles, r => r.BicycleSerialNumber, b => b.SerialNumber, (r, b) => new { r, b.TypeId })
-                .Join(fixture.Types, rb => rb.TypeId, t => t.Id, (rb, t) => new { t.TypeName, RentTime = (rb.r.End - rb.r.Begin).TotalMinutes })
+        var typeRentTime = _fixture.Rentals
+                .Join(_fixture.Bicycles, r => r.BicycleSerialNumber, b => b.SerialNumber, (r, b) => new { r, b.TypeId })
+                .Join(_fixture.Types, rb => rb.TypeId, t => t.Id, (rb, t) => new { t.TypeName, RentTime = (rb.r.End - rb.r.Begin).TotalMinutes })
                 .GroupBy(x => x.TypeName)
                 .Select(g => new { TypeName = g.Key, TotalTime = g.Sum(x => x.RentTime) })
                 .ToList();
