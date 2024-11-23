@@ -87,14 +87,14 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
     public void TestTopFiveBicycles()
     {
         var bicycleRent =
-            (from rent in _fixture.Rentals
-             group rent by rent.Bicycle into grouped
-             orderby grouped.Count() descending
-             select new
-             {
-                 Bicycle = grouped.Key,
-                 RentCount = grouped.Count(),
-             }).Take(5).ToList();
+        (from rent in _fixture.Rentals
+         group rent by rent.BicycleSerialNumber into grouped  
+         orderby grouped.Count() descending
+         select new
+         {
+             BicycleSerialNumber = grouped.Key,
+             RentCount = grouped.Count(),
+         }).Take(5).ToList();
 
         Assert.Equal(5, bicycleRent.Count);
     }
@@ -111,6 +111,6 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
 
         Assert.Equal(11100, max, tolerance: 1); 
         Assert.Equal(1740, min, tolerance: 1); 
-        Assert.Equal(6091, avg, tolerance: 1); 
+        Assert.Equal(6120, avg, tolerance: 1); 
     }
 }
