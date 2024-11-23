@@ -1,4 +1,6 @@
 using BicycleRent.Domain;
+using System.Drawing;
+using System;
 
 namespace BicycleRent.Tests;
 public class BicycleRentData
@@ -44,33 +46,36 @@ public class BicycleRentData
 
         Rentals =
         [
-            new Rental {Id = 0, Customer = Customers[7], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 20, 18, 31, 0), End = new DateTime(2023, 9, 20, 20, 0, 0) },
-            new Rental {Id = 1, Customer = Customers[7], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 27, 17, 30, 0), End = new DateTime(2023, 9, 27, 19, 0, 0) },
-            new Rental {Id = 2, Customer = Customers[0], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 13, 17, 24, 0), End = new DateTime(2023, 9, 13, 19, 30, 0) },
-            new Rental {Id = 3, Customer = Customers[0], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 6, 18, 5, 0), End = new DateTime(2023, 9, 6, 19, 30, 0) },
-            new Rental {Id = 4, Customer = Customers[0], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 14, 18, 13, 0), End = new DateTime(2023, 9, 14, 19, 40, 0) },
-            new Rental {Id = 5, Customer = Customers[0], Bicycle = Bicycles[2], Begin = new DateTime(2023, 9, 7, 17, 49, 0), End = new DateTime(2023, 9, 7, 19, 0, 0) },
-            new Rental {Id = 6, Customer = Customers[0], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 1, 18, 0, 0), End = new DateTime(2023, 9, 1, 20, 0, 0) },
-            new Rental {Id = 7, Customer = Customers[1], Bicycle = Bicycles[2], Begin = new DateTime(2023, 9, 8, 16, 55, 0), End = new DateTime(2023, 9, 8, 20, 0, 0) },
-            new Rental {Id = 8, Customer = Customers[0], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 3, 18, 31, 0), End = new DateTime(2023, 9, 3, 20, 0, 0) },
-            new Rental {Id = 9, Customer = Customers[1], Bicycle = Bicycles[1], Begin = new DateTime(2023, 9, 16, 14, 0, 0), End = new DateTime(2023, 9, 16, 16, 30, 0) },
-            new Rental {Id = 10, Customer = Customers[7], Bicycle = Bicycles[1], Begin = new DateTime(2023, 9, 22, 15, 30, 0), End = new DateTime(2023, 9, 22, 16, 0, 0) },
-            new Rental {Id = 11, Customer = Customers[1], Bicycle = Bicycles[1], Begin = new DateTime(2023, 9, 6, 18, 33, 0), End = new DateTime(2023, 9, 6, 20, 10, 0) },
-            new Rental {Id = 12, Customer = Customers[2], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 11, 18, 20, 0), End = new DateTime(2023, 9, 11, 20, 15, 0) },
-            new Rental {Id = 13, Customer = Customers[2], Bicycle = Bicycles[5], Begin = new DateTime(2023, 9, 23, 13, 40, 0), End = new DateTime(2023, 9, 23, 15, 20, 0) },
-            new Rental {Id = 14, Customer = Customers[3], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 5, 14, 35, 0), End = new DateTime(2023, 9, 5, 15, 30, 0) },
-            new Rental {Id = 15, Customer = Customers[7], Bicycle = Bicycles[5], Begin = new DateTime(2023, 9, 5, 19, 0, 0), End = new DateTime(2023, 9, 5, 21, 20, 0) },
-            new Rental {Id = 16, Customer = Customers[3], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 6, 9, 0, 0), End = new DateTime(2023, 9, 6, 11, 0, 0) },
-            new Rental {Id = 17, Customer = Customers[3], Bicycle = Bicycles[6], Begin = new DateTime(2023, 9, 8, 8, 40, 0), End = new DateTime(2023, 9, 8, 10, 20, 0) },
-            new Rental {Id = 18, Customer = Customers[4], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 11, 11, 31, 0), End = new DateTime(2023, 9, 11, 13, 0, 0) },
-            new Rental {Id = 19, Customer = Customers[4], Bicycle = Bicycles[6], Begin = new DateTime(2023, 9, 14, 10, 0, 0), End = new DateTime(2023, 9, 14, 12, 30, 0) },
-            new Rental {Id = 20, Customer = Customers[5], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 13, 13, 50, 0), End = new DateTime(2023, 9, 13, 16, 0, 0) },
-            new Rental {Id = 21, Customer = Customers[4], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 30, 15, 13, 0), End = new DateTime(2023, 9, 30, 18, 0, 0) },
-            new Rental {Id = 22, Customer = Customers[5], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 5, 16, 44, 0), End = new DateTime(2023, 9, 5, 18, 0, 0) },
-            new Rental {Id = 23, Customer = Customers[6], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 23, 12, 1, 0), End = new DateTime(2023, 9, 23, 14, 14, 0) },
-            new Rental {Id = 24, Customer = Customers[5], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 21, 15, 31, 0), End = new DateTime(2023, 9, 21, 16, 0, 0) },
-            new Rental {Id = 25, Customer = Customers[6], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 22, 13, 31, 0), End = new DateTime(2023, 9, 22, 15, 0, 0) },
-            new Rental {Id = 26, Customer = Customers[5], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 1, 12, 31, 0), End = new DateTime(2023, 9, 1, 13, 0, 0) }
+            new Rental {Id = 0, CustomerId = Customers[7].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 20, 18, 31, 0), End = new DateTime(2023, 9, 20, 20, 0, 0)},
+            new Rental {Id = 1, CustomerId = Customers[7].Id, BicycleSerialNumber = Bicycles[3].SerialNumber, Begin = new DateTime(2023, 9, 27, 17, 30, 0), End = new DateTime(2023, 9, 27, 19, 0, 0)},
+            new Rental {Id = 2, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[3].SerialNumber, Begin = new DateTime(2023, 9, 13, 17, 24, 0), End = new DateTime(2023, 9, 13, 19, 30, 0)},
+            new Rental {Id = 3, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[3].SerialNumber, Begin = new DateTime(2023, 9, 6, 18, 5, 0), End = new DateTime(2023, 9, 6, 19, 30, 0)},
+            new Rental {Id = 4, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 14, 18, 13, 0), End = new DateTime(2023, 9, 14, 19, 40, 0)},
+            new Rental {Id = 5, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[2].SerialNumber, Begin = new DateTime(2023, 9, 7, 17, 49, 0), End = new DateTime(2023, 9, 7, 19, 0, 0)},
+            new Rental {Id = 6, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[7].SerialNumber, Begin = new DateTime(2023, 9, 1, 18, 0, 0), End = new DateTime(2023, 9, 1, 20, 0, 0)},
+            new Rental {Id = 7, CustomerId = Customers[1].Id, BicycleSerialNumber = Bicycles[2].SerialNumber, Begin = new DateTime(2023, 9, 8, 16, 55, 0), End = new DateTime(2023, 9, 8, 20, 0, 0)},
+            new Rental {Id = 8, CustomerId = Customers[0].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 3, 18, 31, 0), End = new DateTime(2023, 9, 3, 20, 0, 0)},
+            new Rental {Id = 9, CustomerId = Customers[1].Id, BicycleSerialNumber = Bicycles[1].SerialNumber, Begin = new DateTime(2023, 9, 16, 14, 0, 0), End = new DateTime(2023, 9, 16, 16, 30, 0)},
+            new Rental {Id = 10, CustomerId = Customers[7].Id, BicycleSerialNumber = Bicycles[1].SerialNumber, Begin = new DateTime(2023, 9, 22, 15, 30, 0), End = new DateTime(2023, 9, 22, 16, 0, 0)},
+            new Rental {Id = 11, CustomerId = Customers[1].Id, BicycleSerialNumber = Bicycles[1].SerialNumber, Begin = new DateTime(2023, 9, 6, 18, 33, 0), End = new DateTime(2023, 9, 6, 20, 10, 0)},
+            new Rental {Id = 12, CustomerId = Customers[2].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 11, 18, 20, 0), End = new DateTime(2023, 9, 11, 20, 15, 0)},
+            new Rental {Id = 13, CustomerId = Customers[2].Id, BicycleSerialNumber = Bicycles[5].SerialNumber, Begin = new DateTime(2023, 9, 23, 13, 40, 0), End = new DateTime(2023, 9, 23, 15, 20, 0)},
+            new Rental {Id = 14, CustomerId = Customers[3].Id, BicycleSerialNumber = Bicycles[7].SerialNumber, Begin = new DateTime(2023, 9, 5, 14, 35, 0), End = new DateTime(2023, 9, 5, 15, 30, 0)},
+            new Rental {Id = 15, CustomerId = Customers[6].Id, BicycleSerialNumber = Bicycles[1].SerialNumber, Begin = new DateTime(2023, 9, 5, 19, 0, 0), End = new DateTime(2023, 9, 5, 21, 20, 0)},
+            new Rental {Id = 16, CustomerId = Customers[2].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 6, 9, 0, 0), End = new DateTime(2023, 9, 6, 11, 0, 0)},
+            new Rental {Id = 17, CustomerId = Customers[3].Id, BicycleSerialNumber = Bicycles[6].SerialNumber, Begin = new DateTime(2023, 9, 8, 8, 40, 0), End = new DateTime(2023, 9, 8, 10, 20, 0)},
+            new Rental {Id = 18, CustomerId = Customers[4].Id, BicycleSerialNumber = Bicycles[7].SerialNumber, Begin = new DateTime(2023, 9, 11, 11, 31, 0), End = new DateTime(2023, 9, 11, 13, 0, 0)},
+            new Rental {Id = 19, CustomerId = Customers[4].Id, BicycleSerialNumber = Bicycles[6].SerialNumber, Begin = new DateTime(2023, 9, 14, 10, 0, 0), End = new DateTime(2023, 9, 14, 12, 30, 0)},
+            new Rental {Id = 20, CustomerId = Customers[5].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 13, 13, 50, 0), End = new DateTime(2023, 9, 13, 16, 0, 0)},
+            new Rental {Id = 21, CustomerId = Customers[4].Id, BicycleSerialNumber = Bicycles[0].SerialNumber, Begin = new DateTime(2023, 9, 30, 15, 13, 0), End = new DateTime(2023, 9, 30, 18, 0, 0)},
+            new Rental {Id = 22, CustomerId = Customers[5].Id, BicycleSerialNumber = Bicycles[0].SerialNumber, Begin = new DateTime(2023, 9, 5, 16, 44, 0), End = new DateTime(2023, 9, 5, 18, 0, 0)},
+            new Rental {Id = 23, CustomerId = Customers[6].Id, BicycleSerialNumber = Bicycles[0].SerialNumber, Begin = new DateTime(2023, 9, 23, 12, 1, 0), End = new DateTime(2023, 9, 23, 14, 14, 0)},
+            new Rental {Id = 24, CustomerId = Customers[5].Id, BicycleSerialNumber = Bicycles[4].SerialNumber, Begin = new DateTime(2023, 9, 21, 15, 31, 0), End = new DateTime(2023, 9, 21, 16, 0, 0)},
+            new Rental {Id = 25, CustomerId = Customers[6].Id, BicycleSerialNumber = Bicycles[3].SerialNumber, Begin = new DateTime(2023, 9, 22, 13, 31, 0), End = new DateTime(2023, 9, 22, 15, 0, 0)},
+            new Rental {Id = 26, CustomerId = Customers[5].Id, BicycleSerialNumber = Bicycles[7].SerialNumber, Begin = new DateTime(2023, 9, 1, 12, 31, 0), End = new DateTime(2023, 9, 1, 13, 0, 0)},
+            new Rental {Id = 27, CustomerId = Customers[5].Id, BicycleSerialNumber = Bicycles[2].SerialNumber, Begin = new DateTime(2023, 12, 1, 15, 31, 0), End = new DateTime(2023, 12, 1, 17, 0, 0)},
+            new Rental {Id = 28, CustomerId = Customers[3].Id, BicycleSerialNumber = Bicycles[1].SerialNumber, Begin = new DateTime(2023, 10, 2, 17, 20, 0), End = new DateTime(2023, 10, 2, 19, 0, 0)},
+            new Rental {Id = 29, CustomerId = Customers[6].Id, BicycleSerialNumber = Bicycles[0].SerialNumber, Begin = new DateTime(2023, 10, 19, 20, 20, 0), End = new DateTime(2023, 10, 19, 22, 30, 0)}
         ];
     }
 };

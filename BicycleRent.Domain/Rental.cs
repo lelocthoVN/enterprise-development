@@ -27,11 +27,11 @@ public class Rental
     /// <summary>
     /// The rented bicycle
     /// </summary>
-    public required Bicycle Bicycle { get; set; }
+    public Bicycle? Bicycle { get; set; }
     /// <summary>
     /// The customer renting the bicycle
     /// </summary>
-    public required Customer Customer { get; set; }
+    public Customer? Customer { get; set; }
     /// <summary>
     /// Start time of the rental
     /// </summary>

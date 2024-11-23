@@ -30,9 +30,9 @@ public class Bicycle
     /// <summary>
     /// Navigation property to BicycleType
     /// </summary>
-    public required BicycleType BicycleType { get; set; }
+    public BicycleType? BicycleType { get; set; }
     /// <summary>
     /// Navigation property to Rentals 
     /// </summary>
-    public required ICollection<Rental> Rentals { get; set; } = new List<Rental>();
+    public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
 }

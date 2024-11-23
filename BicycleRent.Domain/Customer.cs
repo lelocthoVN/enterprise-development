@@ -29,5 +29,5 @@ public class Customer
     /// <summary>
     /// Collection of rentals associated with the customer
     /// </summary>
-    public required ICollection<Rental> Rentals { get; set; } = new List<Rental>();
+    public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
 }

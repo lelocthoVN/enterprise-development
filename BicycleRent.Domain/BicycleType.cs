@@ -25,5 +25,5 @@ public class BicycleType
     /// <summary>
     /// Navigation property to Bicycles 
     /// </summary>
-    public required ICollection<Bicycle> Bicycles { get; set; } = new List<Bicycle>();
+    public ICollection<Bicycle> Bicycles { get; set; } = new List<Bicycle>();
 }

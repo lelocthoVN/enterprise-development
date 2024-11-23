@@ -1,4 +1,6 @@
-﻿namespace BicycleRent.Tests;
+﻿using BicycleRent.Domain;
+
+namespace BicycleRent.Tests;
 
 public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRentData>
 {
@@ -16,7 +18,7 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
              join bike in _fixture.Bicycles on type.Id equals bike.TypeId
              select bike).ToList();
 
-        Assert.Equal(4, sportBicycle.Count); // Adjust the expected count according to your data
+        Assert.Equal(4, sportBicycle.Count); 
     }
 
     /// <summary>
@@ -26,16 +28,16 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
     public void TestMountainBicycleCustomers()
     {
         var mountainCustomers =
-            (from type in _fixture.Types
-             where type.TypeName == "Mountain"
-             join bike in _fixture.Bicycles on type.Id equals bike.TypeId
-             join rent in _fixture.Rentals on bike equals rent.Bicycle
-             join client in _fixture.Customers on rent.Customer equals client
-             orderby client.FullName
-             select client).Distinct().ToList();
+        (from type in _fixture.Types
+         where type.TypeName == "Mountain"  
+         join bike in _fixture.Bicycles on type.Id equals bike.TypeId
+         join rent in _fixture.Rentals on bike.SerialNumber equals rent.BicycleSerialNumber  
+         join client in _fixture.Customers on rent.CustomerId equals client.Id  
+         orderby client.FullName
+         select client).Distinct().ToList();
 
-        Assert.Equal(6, mountainCustomers.Count); // Adjust the expected count according to your data
-        Assert.Equal("Agamedes Rouche", mountainCustomers.First().FullName); // Adjust the expected first name
+        Assert.Equal(7, mountainCustomers.Count);
+        Assert.Equal("Agamedes Rouche", mountainCustomers.First().FullName);
     }
 
     /// <summary>
@@ -44,19 +46,15 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
     [Fact]
     public void TestBicycleTimeRents()
     {
-        var typeRentTime =
-            (from type in _fixture.Types
-             join bike in _fixture.Bicycles on type.Id equals bike.TypeId
-             join rent in _fixture.Rentals on bike equals rent.Bicycle
-             group rent by type.TypeName into grouped
-             select new
-             {
-                 TypeName = grouped.Key,
-                 TotalTime = grouped.Sum(r => (r.End - r.Begin).TotalSeconds)
-             }).ToList();
+        var typeRentTime = fixture.Rentals
+                .Join(fixture.Bicycles, r => r.BicycleSerialNumber, b => b.SerialNumber, (r, b) => new { r, b.TypeId })
+                .Join(fixture.Types, rb => rb.TypeId, t => t.Id, (rb, t) => new { t.TypeName, RentTime = (rb.r.End - rb.r.Begin).TotalMinutes })
+                .GroupBy(x => x.TypeName)
+                .Select(g => new { TypeName = g.Key, TotalTime = g.Sum(x => x.RentTime) })
+                .ToList();
 
         Assert.NotEmpty(typeRentTime);
-        Assert.Equal(75360, typeRentTime.First().TotalTime, tolerance: 10); // Adjust the expected value
+        Assert.Equal(1176, typeRentTime.First().TotalTime, tolerance: 10);
     }
 
     /// <summary>
@@ -111,8 +109,8 @@ public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRen
         var min = _fixture.Rentals.Min(r => (r.End - r.Begin).TotalSeconds);
         var avg = _fixture.Rentals.Average(r => (r.End - r.Begin).TotalSeconds);
 
-        Assert.Equal(11100, max, tolerance: 1); // Adjust the expected value
-        Assert.Equal(1740, min, tolerance: 1); // Adjust the expected value
-        Assert.Equal(6091, avg, tolerance: 1); // Adjust the expected value
+        Assert.Equal(11100, max, tolerance: 1); 
+        Assert.Equal(1740, min, tolerance: 1); 
+        Assert.Equal(6091, avg, tolerance: 1); 
     }
 }
