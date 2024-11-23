@@ -1,21 +1,22 @@
-﻿using BicycleRent.Domain.Interfaces;
+﻿using BicycleRent.Domain.Contexts;
+using BicycleRent.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicycleRent.Domain.Repositories;
 
-public class BicycleTypeRepository : IRepository<BicycleType, int>
+public class BicycleTypeRepository(BicycleRentContext context) : IRepository<BicycleType, int>
 {
-    private static readonly List<BicycleType> _bicycleTypes = [];
-    private static int _nextId = 0;
     /// <summary>
     /// Get all bicycle types
     /// </summary>
-    public IEnumerable<BicycleType> GetAll() => _bicycleTypes;
+    public IEnumerable<BicycleType> GetAll() => context.BicycleTypes.Include(bt => bt.Bicycles).ToList();
     
     /// <summary>
     /// Get a bicycle type by its ID
     /// </summary>
     /// <param name="id">The ID of the bicycle type</param>
-    public BicycleType? GetById(int id) => _bicycleTypes.FirstOrDefault(x => x.Id == id);
+    public BicycleType? GetById(int id) => 
+        context.BicycleTypes.Include(bt => bt.Bicycles).FirstOrDefault(x => x.Id == id);
     
     /// <summary>
     /// Delete a bicycle type by its ID
@@ -28,7 +29,8 @@ public class BicycleTypeRepository : IRepository<BicycleType, int>
         {
             return false;
         }
-        _bicycleTypes.Remove(bicycleType);
+        context.BicycleTypes.Remove(bicycleType);
+        context.SaveChanges();
         return true;
     }
 
@@ -46,6 +48,7 @@ public class BicycleTypeRepository : IRepository<BicycleType, int>
         }
         existingBicycleType.TypeName = entity.TypeName;
         existingBicycleType.RentalPrice = entity.RentalPrice;
+        context.SaveChanges();
         return true;
     }
 
@@ -57,8 +60,8 @@ public class BicycleTypeRepository : IRepository<BicycleType, int>
     {
         if (GetById(entity.Id) == null)
         {
-            entity.Id = _nextId++;
-            _bicycleTypes.Add(entity);
+            context.BicycleTypes.Add(entity);
+            context.SaveChanges();
         }      
     }
 }

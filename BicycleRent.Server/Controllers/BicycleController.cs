@@ -2,6 +2,7 @@
 using BicycleRent.Domain;
 using BicycleRent.Domain.Interfaces;
 using BicycleRent.Server.Dto;
+using BicycleRent.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicycleRent.Server.Controllers;
@@ -11,8 +12,9 @@ namespace BicycleRent.Server.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class BicycleController(IRepository<Bicycle, string> repository, IMapper mapper) : ControllerBase
+public class BicycleController(BicycleService service) : ControllerBase
 {
+
     /// <summary>
     /// Get all object
     /// </summary>
@@ -20,7 +22,15 @@ public class BicycleController(IRepository<Bicycle, string> repository, IMapper 
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Empty list</response>
     [HttpGet]
-    public ActionResult<IEnumerable<Bicycle>>  Get() => Ok(repository.GetAll());
+    public ActionResult<IEnumerable<BicycleDto>> Get()
+    {
+        var bicycles = service.GetAll();
+        if (!bicycles.Any())
+        {
+            return NotFound("No bicycles found");
+        }
+        return Ok(bicycles);
+    }
 
     /// <summary>
     /// Get a object by its serial number
@@ -30,19 +40,34 @@ public class BicycleController(IRepository<Bicycle, string> repository, IMapper 
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpGet("{serialNumber}")]
-    public ActionResult<Bicycle> Get(string serialNumber) => Ok(repository.GetById(serialNumber));
-
+    public ActionResult<BicycleDto> Get(string serialNumber)
+    {
+        var bicycle = service.GetById(serialNumber);
+        if (bicycle == null)
+        {
+            return NotFound($"Bicycle with serial number '{serialNumber}' not found");
+        }
+        return Ok(bicycle);
+    }
     /// <summary>
     /// Add a new object
     /// </summary>
     /// <param name="value">Object to add</param>
     /// <response code="200">The request was completed successfully</response>
+    /// <response code="404">Invalid data provided in the request</response>
     [HttpPost]
-    public IActionResult Post([FromBody] BicycleDto value)
+    public ActionResult<BicycleDto> Post([FromBody] BicycleDto value)
     {
-        var bike = mapper.Map<Bicycle>(value);
-        repository.Add(bike);
-        return Ok();
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        if (service.GetById(value.SerialNumber) != null)
+        {
+            return Conflict($"Bicycle with serial number '{value.SerialNumber}' already exists");
+        }
+        service.Add(value);
+        return CreatedAtAction(nameof(Get), new { serialNumber = value.SerialNumber }, value);
     }
 
     /// <summary>
@@ -54,14 +79,21 @@ public class BicycleController(IRepository<Bicycle, string> repository, IMapper 
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpPut("{serialNumber}")]
-    public ActionResult<Bicycle> Put(string serialNumber, [FromBody] BicycleDto value)
+    public ActionResult<BicycleDto> Put([FromBody] BicycleDto value, string serialNumber)
     {
-        var bicycle = mapper.Map<Bicycle>(value);
-        if (!repository.Update(bicycle, serialNumber))
+        if (!ModelState.IsValid)
         {
-            NotFound();
+            return BadRequest(ModelState);
         }
-        return Ok(bicycle);
+        if (!string.Equals(serialNumber, value.SerialNumber, StringComparison.OrdinalIgnoreCase))
+        {
+            return BadRequest("The serial number in the URL does not match the serial number in the request body");
+        }
+        if (!service.Update(value, serialNumber))
+        {
+            return NotFound($"Bicycle with serial number '{serialNumber}' not found");
+        }
+        return Ok(value);
     }
 
     /// <summary>
@@ -71,13 +103,13 @@ public class BicycleController(IRepository<Bicycle, string> repository, IMapper 
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpDelete("{serialNumber}")]
-    public IActionResult Delete(string serialNumber)
+    public ActionResult<string> Delete(string serialNumber)
     {
-        if (!repository.Delete(serialNumber))
+        if (!service.Delete(serialNumber))
         {
-            return NotFound();
+            return NotFound($"Bicycle with serial number '{serialNumber}' not found.");
         }
-        return Ok();
+        return Ok($"Bicycle with serial number '{serialNumber}' deleted successfully.");
     }
 }
 

@@ -1,6 +1,4 @@
-﻿using BicycleRent.Domain;
-
-namespace BicycleRent.Server.Dto;
+﻿namespace BicycleRent.Server.Dto;
 
 /// <summary>
 /// DTO class for representing the rentals
@@ -8,13 +6,17 @@ namespace BicycleRent.Server.Dto;
 public class RentalDto
 {
     /// <summary>
-    /// The rented bicycle
+    /// Rental ID
     /// </summary>
-    public required Bicycle Bicycle { get; set; }
+    public required int Id { get; set; }
     /// <summary>
-    /// The customer renting the bicycle
+    /// Bicycle's SerialNumber being rented
     /// </summary>
-    public required Customer Customer { get; set; }
+    public required string BicycleSerialNumber { get; set; }
+    /// <summary>
+    /// Customer ID renting the bicycle
+    /// </summary>
+    public required int CustomerId { get; set; }
     /// <summary>
     /// Start time of the rental
     /// </summary>

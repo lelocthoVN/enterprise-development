@@ -1,22 +1,30 @@
-﻿using BicycleRent.Domain.Interfaces;
+﻿using BicycleRent.Domain.Contexts;
+using BicycleRent.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicycleRent.Domain.Repositories;
 
-public class RentalRepository : IRepository<Rental, int>
+public class RentalRepository(BicycleRentContext context) : IRepository<Rental, int>
 {
-    private static readonly List<Rental> _rentals = [];
-    private static int _nextId = 0; 
-
     /// <summary>
     /// Get all rentals
     /// </summary>
-    public IEnumerable<Rental> GetAll() => _rentals;
+    public IEnumerable<Rental> GetAll() =>
+        context.Rentals
+               .Include(r => r.Customer)
+               .Include(r => r.Bicycle)
+               .ToList();
+
 
     /// <summary>
     /// Get a rental by its ID
     /// </summary>
     /// <param name="id">The ID of the rental</param>
-    public Rental? GetById(int id) => _rentals.FirstOrDefault(r => r.Id == id);
+    public Rental? GetById(int id) =>
+        context.Rentals
+               .Include(r => r.Customer)
+               .Include(r => r.Bicycle)
+               .FirstOrDefault(r => r.Id == id);
 
     /// <summary>
     /// Delete a rental by its ID
@@ -29,7 +37,8 @@ public class RentalRepository : IRepository<Rental, int>
         {
             return false;
         }
-        _rentals.Remove(rental);
+        context.Rentals.Remove(rental);
+        context.SaveChanges();
         return true;
     }
 
@@ -45,10 +54,12 @@ public class RentalRepository : IRepository<Rental, int>
         {
             return false;
         }
-        existingRental.Bicycle = entity.Bicycle;
-        existingRental.Customer = entity.Customer;
+        existingRental.Id = entity.Id;
+        existingRental.CustomerId = entity.CustomerId;
+        existingRental.BicycleSerialNumber = entity.BicycleSerialNumber;
         existingRental.Begin = entity.Begin;
         existingRental.End = entity.End;
+        context.SaveChanges();
         return true;
     }
 
@@ -58,8 +69,7 @@ public class RentalRepository : IRepository<Rental, int>
     /// <param name="entity">The rental to add</param>
     public void Add(Rental entity)
     {
-        // Assign a new ID and add the rental
-        entity.Id = _nextId++;
-        _rentals.Add(entity);
+        context.Rentals.Add(entity);
+        context.SaveChanges();
     }
 }

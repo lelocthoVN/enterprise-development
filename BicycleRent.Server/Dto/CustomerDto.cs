@@ -6,6 +6,10 @@
 public class CustomerDto
 {
     /// <summary>
+    /// Customer's ID
+    /// </summary>
+    public required int Id { get; set; }
+    /// <summary>
     /// Full name of the customer
     /// </summary>
     public required string FullName { get; set; }

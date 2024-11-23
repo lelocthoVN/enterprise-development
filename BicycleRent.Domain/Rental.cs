@@ -1,14 +1,29 @@
-﻿namespace BicycleRent.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BicycleRent.Domain;
 
 /// <summary>
 /// Class that represents specific rental operation
 /// </summary>
+// [Table("rental")]
 public class Rental
 {
     /// <summary>
     /// Rental ID
     /// </summary>
+    [Key]
     public required int Id { get; set; }
+    /// <summary>
+    /// Bicycle rental customer ID
+    /// </summary> 
+    [ForeignKey("Customer")]
+    public required int CustomerId { get; set; }
+    /// <summary>
+    /// Bicycle's SerialNumber is rented
+    /// </summary>
+    [ForeignKey("Bicycle")]
+    public required string BicycleSerialNumber { get; set; } 
     /// <summary>
     /// The rented bicycle
     /// </summary>

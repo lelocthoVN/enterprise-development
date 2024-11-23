@@ -67,7 +67,7 @@ public class BicycleRentData
             new Rental {Id = 20, Customer = Customers[5], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 13, 13, 50, 0), End = new DateTime(2023, 9, 13, 16, 0, 0) },
             new Rental {Id = 21, Customer = Customers[4], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 30, 15, 13, 0), End = new DateTime(2023, 9, 30, 18, 0, 0) },
             new Rental {Id = 22, Customer = Customers[5], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 5, 16, 44, 0), End = new DateTime(2023, 9, 5, 18, 0, 0) },
-            new Rental {Id = 23,Customer = Customers[6], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 23, 12, 1, 0), End = new DateTime(2023, 9, 23, 14, 14, 0) },
+            new Rental {Id = 23, Customer = Customers[6], Bicycle = Bicycles[0], Begin = new DateTime(2023, 9, 23, 12, 1, 0), End = new DateTime(2023, 9, 23, 14, 14, 0) },
             new Rental {Id = 24, Customer = Customers[5], Bicycle = Bicycles[4], Begin = new DateTime(2023, 9, 21, 15, 31, 0), End = new DateTime(2023, 9, 21, 16, 0, 0) },
             new Rental {Id = 25, Customer = Customers[6], Bicycle = Bicycles[3], Begin = new DateTime(2023, 9, 22, 13, 31, 0), End = new DateTime(2023, 9, 22, 15, 0, 0) },
             new Rental {Id = 26, Customer = Customers[5], Bicycle = Bicycles[7], Begin = new DateTime(2023, 9, 1, 12, 31, 0), End = new DateTime(2023, 9, 1, 13, 0, 0) }

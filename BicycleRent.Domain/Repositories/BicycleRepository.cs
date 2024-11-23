@@ -1,21 +1,22 @@
-﻿using BicycleRent.Domain.Interfaces;
+﻿using BicycleRent.Domain.Contexts;
+using BicycleRent.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicycleRent.Domain.Repositories;
 
-public class BicycleRepository : IRepository<Bicycle, string>
+public class BicycleRepository(BicycleRentContext context) : IRepository<Bicycle, string>
 {
-    private static readonly List<Bicycle> _bicycles = [];
-
     /// <summary>
     /// Get all bicycles
     /// </summary>
-    public IEnumerable<Bicycle> GetAll() => _bicycles;
+    public IEnumerable<Bicycle> GetAll() => context.Bicycles.Include(b => b.BicycleType).ToList();
 
     /// <summary>
     /// Get a bicycle by its serial number
     /// </summary>
     /// <param name="serialNumber">The serial number of the bicycle</param>
-    public Bicycle? GetById(string serialNumber) => _bicycles.FirstOrDefault(x => x.SerialNumber == serialNumber);
+    public Bicycle? GetById(string serialNumber) => 
+        context.Bicycles.Include(b => b.BicycleType).FirstOrDefault(x => x.SerialNumber == serialNumber);
 
     /// <summary>
     /// Delete a bicycle by its serial number
@@ -28,7 +29,8 @@ public class BicycleRepository : IRepository<Bicycle, string>
         {
             return false;
         }
-        _bicycles.Remove(bicycle);
+        context.Bicycles.Remove(bicycle);
+        context.SaveChanges();
         return true;
     }
 
@@ -47,6 +49,7 @@ public class BicycleRepository : IRepository<Bicycle, string>
         existingBicycle.TypeId = entity.TypeId;
         existingBicycle.Model = entity.Model;
         existingBicycle.Color = entity.Color;
+        context.SaveChanges();
         return true;
     }
 
@@ -57,6 +60,9 @@ public class BicycleRepository : IRepository<Bicycle, string>
     public void Add(Bicycle entity)
     {
         if(GetById(entity.SerialNumber) == null)
-            _bicycles.Add(entity);
+        {
+            context.Bicycles.Add(entity);
+            context.SaveChanges();
+        }
     }
 }

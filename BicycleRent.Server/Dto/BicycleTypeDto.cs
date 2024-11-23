@@ -6,6 +6,10 @@
 public class BicycleTypeDto
 {
     /// <summary>
+    /// BicycleType's ID
+    /// </summary>
+    public required int Id { get; set; }
+    /// <summary>
     /// Rental cost per hour
     /// </summary>
     public required double RentalPrice { get; set; }

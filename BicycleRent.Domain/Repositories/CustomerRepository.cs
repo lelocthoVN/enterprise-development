@@ -1,22 +1,21 @@
-﻿using BicycleRent.Domain.Interfaces;
+﻿using BicycleRent.Domain.Contexts;
+using BicycleRent.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BicycleRent.Domain.Repositories;
 
-public class CustomerRepository : IRepository<Customer, int>
+public class CustomerRepository(BicycleRentContext context) : IRepository<Customer, int>
 {
-    private static readonly List<Customer> _customers = [];
-    private static int _nextId = 0;
-
     /// <summary>
     /// Get all customers
     /// </summary>
-    public IEnumerable<Customer> GetAll() => _customers;
+    public IEnumerable<Customer> GetAll() => context.Customers.Include(c => c.Rentals).ToList();
 
     /// <summary>
     /// Get a customer by their ID
     /// </summary>
     /// <param name="id">The ID of the customer</param>
-    public Customer? GetById(int id) => _customers.FirstOrDefault(x => x.Id == id);
+    public Customer? GetById(int id) => context.Customers.Include(c => c.Rentals).FirstOrDefault(x => x.Id == id);
 
     /// <summary>
     /// Delete a customer by their ID
@@ -29,7 +28,8 @@ public class CustomerRepository : IRepository<Customer, int>
         {
             return false;
         }
-        _customers.Remove(customer);
+        context.Customers.Remove(customer);
+        context.SaveChanges();
         return true;
     }
 
@@ -45,9 +45,11 @@ public class CustomerRepository : IRepository<Customer, int>
         {
             return false;
         }
+        existingCustomer.Id = entity.Id;
         existingCustomer.FullName = entity.FullName;
         existingCustomer.BirthDate = entity.BirthDate;
         existingCustomer.PhoneNumber = entity.PhoneNumber;
+        context.SaveChanges();
         return true;
     }
 
@@ -59,8 +61,8 @@ public class CustomerRepository : IRepository<Customer, int>
     {
         if (GetById(entity.Id) == null)
         {
-            entity.Id = _nextId++;
-            _customers.Add(entity);
+            context.Customers.Add(entity);
+            context.SaveChanges();
         }
     }
 }

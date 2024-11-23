@@ -1,4 +1,8 @@
 ﻿namespace BicycleRent.Domain.Interfaces;
+
+/// <summary>
+/// Interface for object's repository
+/// </summary>
 public interface IRepository<TEntity, TKey>
 {
     /// <summary>
@@ -31,7 +35,6 @@ public interface IRepository<TEntity, TKey>
     /// Update an element of a collection by id
     /// </summary>
     /// <param name="entity">object</param>
-    /// <param name="id">object's id</param>
     /// <returns></returns>
     public bool Update(TEntity entity, TKey id);
 }

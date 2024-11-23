@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BicycleRent.Domain;
-using BicycleRent.Domain.Interfaces;
 using BicycleRent.Server.Dto;
+using BicycleRent.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BicycleRent.Server.Controllers;
@@ -11,7 +11,7 @@ namespace BicycleRent.Server.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class RentalController(IRepository<Rental, int> repository, IMapper mapper) : ControllerBase
+public class RentalController(RentalService service) : ControllerBase
 {
     /// <summary>
     /// Get all object
@@ -20,7 +20,15 @@ public class RentalController(IRepository<Rental, int> repository, IMapper mappe
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Empty list</response>
     [HttpGet]
-    public ActionResult<IEnumerable<Rental>> Get() => Ok(repository.GetAll());
+    public ActionResult<IEnumerable<RentalDto>> Get()
+    {
+        var rentals = service.GetAll();
+        if (!rentals.Any())
+        {
+            return NotFound("No rentals found.");
+        }
+        return Ok(rentals);
+    }
 
     /// <summary>
     /// Get a object by its ID
@@ -30,19 +38,31 @@ public class RentalController(IRepository<Rental, int> repository, IMapper mappe
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpGet("{id}")]
-    public ActionResult<Customer> Get(int id) => Ok(repository.GetById(id));
+    public ActionResult<RentalDto> Get(int id)
+    {
+        var rental = service.GetById(id);
+        if (rental == null)
+        {
+            return NotFound($"Rental with ID '{id}' not found.");
+        }
+        return Ok(rental);
+    }
 
     /// <summary>
     /// Add a new object
     /// </summary>
     /// <param name="value">Object to add</param>
     /// <response code="200">The request was completed successfully</response>
+    /// <response code="404">Invalid data</response>
     [HttpPost]
-    public IActionResult Post([FromBody] RentalDto value)
+    public ActionResult<RentalDto> Post([FromBody] RentalDto value)
     {
-        var rental = mapper.Map<Rental>(value);
-        repository.Add(rental);
-        return Ok();
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        service.Add(value);
+        return CreatedAtAction(nameof(Get), new { id = value.Id }, value);
     }
 
     /// <summary>
@@ -54,14 +74,17 @@ public class RentalController(IRepository<Rental, int> repository, IMapper mappe
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpPut("{id}")]
-    public ActionResult<Rental> Put(int id, [FromBody] RentalDto value)
+    public ActionResult<RentalDto> Put([FromBody] RentalDto value, int id)
     {
-        var rental = mapper.Map<Rental>(value);
-        if (!repository.Update(rental, id))
+        if (!ModelState.IsValid)
         {
-            NotFound();
+            return BadRequest(ModelState);
         }
-        return Ok(rental);
+        if (!service.Update(value, id))
+        {
+            return NotFound($"Rental with ID '{value.Id}' not found.");
+        }
+        return Ok(value);
     }
 
     /// <summary>
@@ -73,10 +96,10 @@ public class RentalController(IRepository<Rental, int> repository, IMapper mappe
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        if (!repository.Delete(id))
+        if (!service.Delete(id))
         {
-            return NotFound();
+            return NotFound($"Rental with ID '{id}' not found.");
         }
-        return Ok();
+        return Ok($"Rental with ID '{id}' deleted successfully.");
     }
 }
