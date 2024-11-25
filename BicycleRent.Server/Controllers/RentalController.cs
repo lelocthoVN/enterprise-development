@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BicycleRent.Domain;
+﻿using BicycleRent.Domain;
 using BicycleRent.Server.Dto;
 using BicycleRent.Server.Services;
 using Microsoft.AspNetCore.Mvc;

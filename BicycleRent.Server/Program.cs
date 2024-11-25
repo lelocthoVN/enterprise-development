@@ -1,9 +1,6 @@
-using BicycleRent.Domain;
 using BicycleRent.Domain.Contexts;
-using BicycleRent.Domain.Interfaces;
 using BicycleRent.Domain.Repositories;
 using BicycleRent.Server;
-using BicycleRent.Server.Dto;
 using BicycleRent.Server.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

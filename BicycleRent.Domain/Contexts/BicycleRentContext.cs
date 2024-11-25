@@ -43,18 +43,6 @@ public class BicycleRentContext : DbContext
             .Property(bt => bt.RentalPrice)
             .IsRequired();
 
-        //// Configure automatically generate IDs
-        //modelBuilder.Entity<BicycleType>()
-        //    .Property(bt => bt.Id)
-        //    .ValueGeneratedOnAdd();
-        //modelBuilder.Entity<Customer>()
-        //    .Property(bt => bt.Id)
-        //    .ValueGeneratedOnAdd();
-        //modelBuilder.Entity<Rental>()
-        //    .Property(bt => bt.Id)
-        //    .ValueGeneratedOnAdd();
-
-
         // Configure relationship between Bicycle and BicycleType
         modelBuilder.Entity<Bicycle>()
             .HasOne(b => b.BicycleType)  
@@ -65,9 +53,9 @@ public class BicycleRentContext : DbContext
 
         // Configure relationship between Rental and Customer
         modelBuilder.Entity<Rental>()
-            .HasOne(r => r.Customer)  // Mỗi rental thuộc về một customer
-            .WithMany(c => c.Rentals)  // Một customer có nhiều rental
-            .HasForeignKey(r => r.CustomerId)  // Khóa ngoại CustomerId trong bảng Rental
+            .HasOne(r => r.Customer)  
+            .WithMany(c => c.Rentals)
+            .HasForeignKey(r => r.CustomerId)  
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
 

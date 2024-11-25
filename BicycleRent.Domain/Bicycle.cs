@@ -6,7 +6,7 @@ namespace BicycleRent.Domain;
 /// <summary>
 /// Class that represents specific bicycle available for rent
 /// </summary>
-// [Table("bicycle")]
+[Table("bicycle")]
 public class Bicycle
 {
     /// <summary>
