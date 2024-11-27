@@ -1,6 +1,4 @@
-﻿using BicycleRent.Domain;
-
-namespace BicycleRent.Tests;
+﻿namespace BicycleRent.Tests;
 
 public class BicycleRentTest(BicycleRentData fixture) : IClassFixture<BicycleRentData>
 {

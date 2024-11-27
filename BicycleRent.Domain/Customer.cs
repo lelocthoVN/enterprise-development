@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BicycleRent.Domain;
 
 /// <summary>
 /// Class customer information for bicycle rental
 /// </summary>
-[Table("customer")]
 public class Customer
 {
     /// <summary>

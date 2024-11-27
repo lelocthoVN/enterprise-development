@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BicycleRent.Domain;
 
 /// <summary>
 /// Class that represents specific bicycle types
 /// </summary>
-[Table("bicycletype")]
 public class BicycleType
 {
     /// <summary>

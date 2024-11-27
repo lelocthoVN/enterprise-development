@@ -1,6 +1,4 @@
 using BicycleRent.Domain;
-using System.Drawing;
-using System;
 
 namespace BicycleRent.Tests;
 public class BicycleRentData
