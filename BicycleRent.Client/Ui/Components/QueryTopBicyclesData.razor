@@ -1,10 +1,10 @@
 ﻿@inject IBicycleRentApiWrapper BicycleRentApi
 
-<Modal @ref="Top5BicyclesModal">
+<Modal @ref="top5BicyclesModal">
     <ModalContent Centered>
         <ModalHeader>
             <ModalTitle>Top 5 Bicycles</ModalTitle>
-            <CloseButton Clicked="@(() => Top5BicyclesModal.Hide())" />
+            <CloseButton Clicked="@(() => top5BicyclesModal.Hide())" />
         </ModalHeader>
         <ModalBody>
             <DataGrid TItem="TopBicycleDto" Data="@bicycles" Responsive Striped>
@@ -17,18 +17,18 @@
             </DataGrid>
         </ModalBody>
         <ModalFooter>
-            <Button Color="Color.Secondary" Clicked="@(() => Top5BicyclesModal.Hide())">Close</Button>
+            <Button Color="Color.Secondary" Clicked="@(() => top5BicyclesModal.Hide())">Close</Button>
         </ModalFooter>
     </ModalContent>
 </Modal>
 
 @code {
-    private Modal Top5BicyclesModal = new();
+    private Modal top5BicyclesModal = new();
     private ICollection<TopBicycleDto> bicycles = [];
 
     public async Task Show()
     {
         bicycles = await BicycleRentApi.GetTopFiveBicycles();
-        await Top5BicyclesModal.Show();
+        await top5BicyclesModal.Show();
     }
 }

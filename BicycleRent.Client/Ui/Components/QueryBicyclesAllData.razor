@@ -1,14 +1,14 @@
 ﻿@inject IBicycleRentApiWrapper BicycleRentApi
 
-<Modal @ref="AllBicyclesModal">
+<Modal @ref="allBicyclesModal">
     <ModalContent Centered>
         <ModalHeader>
             <ModalTitle>All Bicycles</ModalTitle>
-            <CloseButton Clicked="@(() => AllBicyclesModal.Hide())" />
+            <CloseButton Clicked="@(() => allBicyclesModal.Hide())" />
         </ModalHeader>
         <ModalBody>
             <DataGrid TItem="BicycleDto"
-                      Data="@BicyclesList"
+                      Data="@bicyclesList"
                       Responsive
                       Striped>
                 <DataGridColumns>
@@ -28,23 +28,23 @@
             </DataGrid>
         </ModalBody>
         <ModalFooter>
-            <Button Color="Color.Secondary" Clicked="@(() => AllBicyclesModal.Hide())">Close</Button>
+            <Button Color="Color.Secondary" Clicked="@(() => allBicyclesModal.Hide())">Close</Button>
         </ModalFooter>
     </ModalContent>
 </Modal>
 
 @code {
-    private Modal AllBicyclesModal = new();
-    private ICollection<BicycleDto> BicyclesList = [];
+    private Modal allBicyclesModal = new();
+    private ICollection<BicycleDto> bicyclesList = [];
 
     public async Task Show()
     {
         await LoadData();
-        await AllBicyclesModal.Show();
+        await allBicyclesModal.Show();
     }
 
     private async Task LoadData()
     {
-        BicyclesList = await BicycleRentApi.GetAllBicycles();
+        bicyclesList = await BicycleRentApi.GetAllBicycles();
     }
 }

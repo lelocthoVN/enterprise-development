@@ -1,38 +1,35 @@
 ﻿@inject IBicycleRentApiWrapper BicycleRentApi
 
-<EditForm Model="@Customer" OnValidSubmit="@HandleValidSubmit">
+<EditForm Model="@сustomer" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />  
-    <div class="form-group">
-        <label for="Id">ID</label>
-        <InputNumber id="Id" class="form-control" @bind-Value="Customer.Id" />
-    </div>
+    
     <div class="form-group">
         <label for="FullName">Full Name</label>
-        <InputText id="FullName" class="form-control" @bind-Value="Customer.FullName" />
+        <InputText id="FullName" class="form-control" @bind-Value="сustomer.FullName" />
     </div>
 
     <div class="form-group">
         <label for="BirthDate">Birth Date</label>
-        <InputDate id="BirthDate" class="form-control" @bind-Value="Customer.BirthDate" />
+        <InputDate id="BirthDate" class="form-control" @bind-Value="сustomer.BirthDate" />
     </div>
 
     <div class="form-group">
         <label for="PhoneNumber">Phone Number</label>
-        <InputText id="PhoneNumber" class="form-control" @bind-Value="Customer.PhoneNumber" />
+        <InputText id="PhoneNumber" class="form-control" @bind-Value="сustomer.PhoneNumber" />
     </div>
 
     <button type="submit" class="btn btn-outline-light bg-primary mt-3" style="width: 180px;">Submit</button>
     
-    @if (Message is not null)
+    @if (message is not null)
     {
-        <div class="alert alert-info mt-3">@Message</div>
+        <div class="alert alert-info mt-3">@message</div>
     }
 </EditForm>
 
 @code {
     [Parameter] public EventCallback<CustomerDto> OnCustomerAdded { get; set; }
 
-    private CustomerDto Customer = new()
+    private CustomerDto сustomer = new()
         {
             Id = 0,
             FullName = string.Empty,
@@ -40,23 +37,16 @@
             PhoneNumber = string.Empty
         };
 
-    private string? Message;
+    private string? message;
 
     private async Task HandleValidSubmit()
     {
         try
         {
-            Message = null;
-            var result = await BicycleRentApi.PostCustomer(Customer);
-            if (result != null)
-            {
-                Message = $"Customer '{result.FullName}' added successfully with ID {result.Id}.";
-            }
-            else
-            {
-                Message = "Failed to add customer";
-            }
-            Customer = new()
+            message = null;
+            var result = await BicycleRentApi.PostCustomer(сustomer);
+            message = $"Customer '{result.FullName}' added successfully with ID {result.Id}.";
+            сustomer = new CustomerDto
                 {
                     Id = 0,
                     FullName = string.Empty,
@@ -68,11 +58,11 @@
         {
             if (ex.StatusCode == 409)
             {
-                Message = $"Conflict error: {ex.Message}";
+                message = $"Conflict error: {ex.Message}";
             }
             else
             {
-                 Message = $"{ex.Message}";
+                message = $"{ex.Message}";
             }
         }
     }

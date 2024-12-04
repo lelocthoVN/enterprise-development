@@ -45,11 +45,11 @@
             </tbody>
         </table>
     }
-    
+
 }
 
 @code {
-    private bool showRentals = false; 
+    private bool showRentals = false;
     private bool sortAscending = true;
     private ICollection<RentalDto>? rentals;
 
@@ -82,6 +82,6 @@
         {
             rentals = rentals.OrderBy(r => r.Id).ToList();
         }
-        sortAscending = !sortAscending; 
+        sortAscending = !sortAscending;
     }
 }

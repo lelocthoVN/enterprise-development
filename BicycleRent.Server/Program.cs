@@ -44,8 +44,8 @@ builder.Services.AddAutoMapper(typeof(Mapping));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowBlazorClient",
-        builder => builder
-            .WithOrigins("http://localhost:5287") 
+        policyBuilder => policyBuilder
+            .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader());
 });

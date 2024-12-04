@@ -48,20 +48,17 @@
 </div>
 
 @code {
-    private string? Message;
+    private string? message;
 
     private QueryTopCustomersData TopCustomersModal { get; set; } = new();
    
     private async Task ShowTopCustomers()
     {
-        if (TopCustomersModal != null)
-        {
-            await TopCustomersModal.Show();
-        }
+        await TopCustomersModal.Show();
     }
 
     private void HandleCustomerAdded(CustomerDto customer)
     {
-        Message = $"Customer '{customer.FullName}' was added successfully!";
+        message = $"Customer '{customer.FullName}' was added successfully!";
     }
 }
