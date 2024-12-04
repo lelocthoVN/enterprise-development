@@ -1,0 +1,34 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<Modal @ref="Top5BicyclesModal">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle>Top 5 Bicycles</ModalTitle>
+            <CloseButton Clicked="@(() => Top5BicyclesModal.Hide())" />
+        </ModalHeader>
+        <ModalBody>
+            <DataGrid TItem="TopBicycleDto" Data="@bicycles" Responsive Striped>
+                <DataGridColumns>
+                    <DataGridColumn TItem="TopBicycleDto" Field="@nameof(TopBicycleDto.BicycleSerialNumber)" Caption="Serial Number" />
+                    <DataGridColumn TItem="TopBicycleDto" Field="@nameof(TopBicycleDto.Model)" Caption="Model" />
+                    <DataGridColumn TItem="TopBicycleDto" Field="@nameof(TopBicycleDto.TypeName)" Caption="Type" />
+                    <DataGridColumn TItem="TopBicycleDto" Field="@nameof(TopBicycleDto.RentalCount)" Caption="Rental Count" />
+                </DataGridColumns>
+            </DataGrid>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@(() => Top5BicyclesModal.Hide())">Close</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal Top5BicyclesModal = new();
+    private ICollection<TopBicycleDto> bicycles = [];
+
+    public async Task Show()
+    {
+        bicycles = await BicycleRentApi.GetTopFiveBicycles();
+        await Top5BicyclesModal.Show();
+    }
+}

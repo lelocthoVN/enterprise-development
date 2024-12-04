@@ -30,14 +30,25 @@ builder.Services.AddScoped<BicycleRepository>();
 builder.Services.AddScoped<BicycleTypeRepository>();
 builder.Services.AddScoped<CustomerRepository>();
 builder.Services.AddScoped<RentalRepository>();
+builder.Services.AddScoped<QueryRepository>();
 
 builder.Services.AddScoped<BicycleService>();
 builder.Services.AddScoped<BicycleTypeService>();
 builder.Services.AddScoped<CustomerService>();
 builder.Services.AddScoped<RentalService>();
+builder.Services.AddScoped<QueryService>();
 
 
 builder.Services.AddAutoMapper(typeof(Mapping));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowBlazorClient",
+        builder => builder
+            .WithOrigins("http://localhost:5287") 
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -48,6 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowBlazorClient");
 }
 
 app.UseHttpsRedirection();
@@ -55,3 +67,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+

@@ -93,12 +93,12 @@ public class RentalController(RentalService service) : ControllerBase
     /// <response code="200">The request was completed successfully</response>
     /// <response code="404">Object not found</response>
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public ActionResult<string> Delete(int id)
     {
         if (!service.Delete(id))
         {
-            return NotFound($"Rental with ID '{id}' not found.");
+            return NotFound($"Rental with ID '{id}' not found");
         }
-        return Ok($"Rental with ID '{id}' deleted successfully.");
+        return Ok($"Rental with ID '{id}' deleted successfully");
     }
 }

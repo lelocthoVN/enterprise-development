@@ -18,5 +18,8 @@ public class Mapping : Profile
         CreateMap<BicycleType, BicycleTypeDto>().ReverseMap();
         CreateMap<Customer, CustomerDto>().ReverseMap();
         CreateMap<Rental, RentalDto>().ReverseMap();
+
+        CreateMap<Bicycle, BicycleWithTypeNameDto>()
+            .ForMember(dest => dest.TypeName, opt => opt.MapFrom(src => src.BicycleType != null ? src.BicycleType.TypeName : "Unknown"));
     }
 }

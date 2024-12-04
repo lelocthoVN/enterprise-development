@@ -1,0 +1,50 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<Modal @ref="AllBicyclesModal">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle>All Bicycles</ModalTitle>
+            <CloseButton Clicked="@(() => AllBicyclesModal.Hide())" />
+        </ModalHeader>
+        <ModalBody>
+            <DataGrid TItem="BicycleDto"
+                      Data="@BicyclesList"
+                      Responsive
+                      Striped>
+                <DataGridColumns>
+                    <DataGridColumn TItem="BicycleDto"
+                                    Field="@nameof(BicycleDto.SerialNumber)"
+                                    Caption="Serial Number" />
+                    <DataGridColumn TItem="BicycleDto"
+                                    Field="@nameof(BicycleDto.Model)"
+                                    Caption="Model" />
+                    <DataGridColumn TItem="BicycleDto"
+                                    Field="@nameof(BicycleDto.Color)"
+                                    Caption="Color" />
+                    <DataGridColumn TItem="BicycleDto"
+                                    Field="@nameof(BicycleDto.TypeId)"
+                                    Caption="Type" />
+                </DataGridColumns>
+            </DataGrid>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@(() => AllBicyclesModal.Hide())">Close</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal AllBicyclesModal = new();
+    private ICollection<BicycleDto> BicyclesList = [];
+
+    public async Task Show()
+    {
+        await LoadData();
+        await AllBicyclesModal.Show();
+    }
+
+    private async Task LoadData()
+    {
+        BicyclesList = await BicycleRentApi.GetAllBicycles();
+    }
+}

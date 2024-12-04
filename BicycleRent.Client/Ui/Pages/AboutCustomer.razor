@@ -1,0 +1,67 @@
+﻿@page "/customers"
+
+<PageTitle>About Customers - Bicycle Rent</PageTitle>
+
+<h1 class="text-center">Customer Management</h1>
+<div class="container mt-4">
+    
+    <div class="row mb-4">
+        <div class="col">
+             <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4>Add a New Customer</h4>
+                </div>
+                <div class="card-body">
+                    <PostCustomerForm OnCustomerAdded="HandleCustomerAdded" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4>Get Customer By ID</h4>
+                </div>
+                <div class="card-body">
+                    <QueryCustomerByIdData />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h4>Top Customers</h4>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-outline-light bg-info mt-3" style="width: 180px;" @onclick="@(() => TopCustomersModal.Show())">Top Customers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <QueryTopCustomersData @ref="TopCustomersModal" />
+</div>
+
+@code {
+    private string? Message;
+
+    private QueryTopCustomersData TopCustomersModal { get; set; } = new();
+   
+    private async Task ShowTopCustomers()
+    {
+        if (TopCustomersModal != null)
+        {
+            await TopCustomersModal.Show();
+        }
+    }
+
+    private void HandleCustomerAdded(CustomerDto customer)
+    {
+        Message = $"Customer '{customer.FullName}' was added successfully!";
+    }
+}

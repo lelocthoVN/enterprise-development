@@ -1,0 +1,121 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<Modal @ref="BicyclesByTypeModal">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle>Bicycles by Type</ModalTitle>
+            <CloseButton Clicked="CloseModalAsync" />
+        </ModalHeader>
+        <ModalBody>
+            <Field>
+                <Select TValue="int" @bind-Value="SelectedTypeId" @onchange="OnTypeChanged">
+                    <SelectItem Value="0">Select a bicycle type...</SelectItem>
+                    @foreach (var type in BicycleTypes)
+                    {
+                        <SelectItem Value="@type.Id">@type.TypeName</SelectItem>
+                    }
+                </Select>
+            </Field>
+
+            @if (isLoading)
+            {
+                <div>Loading...</div>
+            }
+            else if (BicyclesByType.Any())
+            {
+                <DataGrid TItem="BicycleWithTypeNameDto"
+                          Data="@BicyclesByType"
+                          Responsive
+                          Striped>
+                    <DataGridColumns>
+                        <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                        Field="@nameof(BicycleWithTypeNameDto.SerialNumber)"
+                                        Caption="Serial Number" />
+                        <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                        Field="@nameof(BicycleWithTypeNameDto.Model)"
+                                        Caption="Model" />
+                        <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                        Field="@nameof(BicycleWithTypeNameDto.Color)"
+                                        Caption="Color" />
+                        <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                        Field="@nameof(BicycleWithTypeNameDto.TypeName)"
+                                        Caption="Type" />
+                    </DataGridColumns>
+                </DataGrid>
+            }
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Primary" Clicked="LoadBicyclesByType">Search</Button>
+            <Button Color="Color.Secondary" Clicked="CloseModalAsync">Close</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal BicyclesByTypeModal { get; set; } = new();
+    private ICollection<BicycleTypeDto> BicycleTypes { get; set; } = [];
+    private ICollection<BicycleWithTypeNameDto> BicyclesByType { get; set; } = []; 
+    private int SelectedTypeId { get; set; } = 0;
+    private bool isLoading { get; set; } = false;
+
+    public async Task Show()
+    {
+        await LoadBicycleTypes(); 
+        await BicyclesByTypeModal.Show();
+    }
+
+    private async Task LoadBicycleTypes()
+    {
+        try
+        {
+            BicycleTypes = await BicycleRentApi.GetAllBicycleTypes();
+            if (BicycleTypes.Any())
+            {
+                SelectedTypeId = 0;
+            }
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading types: {ex.Message}");
+        }
+    }
+
+    private void OnTypeChanged(ChangeEventArgs e)
+    {
+        if (e.Value != null && int.TryParse(e.Value.ToString(), out int result))
+        {
+            SelectedTypeId = result;
+        }
+        else
+        {
+            SelectedTypeId = 0; 
+        }
+    }
+
+    private async Task LoadBicyclesByType()
+    {
+        if (SelectedTypeId > 0)
+        {
+            try
+            {
+                isLoading = true;
+                StateHasChanged();
+                BicyclesByType = await BicycleRentApi.GetBicyclesByType(SelectedTypeId);
+                isLoading = false;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading bicycles by type: {ex.Message}");
+                isLoading = false;
+            }
+        }
+        else
+        {
+            Console.WriteLine("No type selected");
+        }
+    }
+    private async Task CloseModalAsync() => await BicyclesByTypeModal.Hide();
+}
+

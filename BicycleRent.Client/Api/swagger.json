@@ -1,0 +1,1350 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BicycleRent.Server",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Bicycle": {
+      "get": {
+        "tags": [
+          "Bicycle"
+        ],
+        "summary": "Get all object",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empty list"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Bicycle"
+        ],
+        "summary": "Add a new object",
+        "requestBody": {
+          "description": "Object to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid data provided in the request"
+          }
+        }
+      }
+    },
+    "/api/Bicycle/{serialNumber}": {
+      "get": {
+        "tags": [
+          "Bicycle"
+        ],
+        "summary": "Get a object by its serial number",
+        "parameters": [
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Object's serial_number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Bicycle"
+        ],
+        "summary": "Update a object by its serial number",
+        "parameters": [
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Object's serial_number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object to changed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Bicycle"
+        ],
+        "summary": "Delete a object by its serial number",
+        "parameters": [
+          {
+            "name": "serialNumber",
+            "in": "path",
+            "description": "Object's serial_number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      }
+    },
+    "/api/BicycleType": {
+      "get": {
+        "tags": [
+          "BicycleType"
+        ],
+        "summary": "Get all object",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleTypeDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleTypeDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleTypeDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empty list"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "BicycleType"
+        ],
+        "summary": "Add a new object",
+        "requestBody": {
+          "description": "Object to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bad request due to invalid input"
+          }
+        }
+      }
+    },
+    "/api/BicycleType/{id}": {
+      "get": {
+        "tags": [
+          "BicycleType"
+        ],
+        "summary": "Get a object by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BicycleType"
+        ],
+        "summary": "Update a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object to changed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BicycleTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BicycleType"
+        ],
+        "summary": "Delete a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BicycleTypeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      }
+    },
+    "/api/Customer": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Get all object",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomerDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empty list"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Add a new object",
+        "requestBody": {
+          "description": "Object to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    },
+    "/api/Customer/{id}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Get a object by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Update a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object to changed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customer"
+        ],
+        "summary": "Delete a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      }
+    },
+    "/api/Query/bicycles-by-type/{bicycleTypeId}": {
+      "get": {
+        "tags": [
+          "Query"
+        ],
+        "summary": "Get bicycles by type",
+        "parameters": [
+          {
+            "name": "bicycleTypeId",
+            "in": "path",
+            "description": "Type ID of the bicycles",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No bicycles of the given type found"
+          }
+        }
+      }
+    },
+    "/api/Query/available-bicycles": {
+      "get": {
+        "tags": [
+          "Query"
+        ],
+        "summary": "Get available bicycles (not rented)",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BicycleWithTypeNameDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No available bicycles found"
+          }
+        }
+      }
+    },
+    "/api/Query/top-five-bicycles": {
+      "get": {
+        "tags": [
+          "Query"
+        ],
+        "summary": "Get the top 5 rented bicycles",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopBicycleDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopBicycleDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopBicycleDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No rental data available"
+          }
+        }
+      }
+    },
+    "/api/Query/top-customers": {
+      "get": {
+        "tags": [
+          "Query"
+        ],
+        "summary": "Get the top customers by rental activity",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopCustomerDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopCustomerDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopCustomerDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No rental data available"
+          }
+        }
+      }
+    },
+    "/api/Rental": {
+      "get": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Get all object",
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RentalDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Empty list"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Add a new object",
+        "requestBody": {
+          "description": "Object to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    },
+    "/api/Rental/{id}": {
+      "get": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Get a object by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Update a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Object to changed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RentalDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RentalDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rental"
+        ],
+        "summary": "Delete a object by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Object's ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was completed successfully",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Object not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BicycleDto": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string",
+            "description": "Bicycle's serial number",
+            "nullable": true
+          },
+          "typeId": {
+            "type": "integer",
+            "description": "Bicycle's type ID",
+            "format": "int32"
+          },
+          "model": {
+            "type": "string",
+            "description": "Bicycle's model",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "Bicycle's color",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO class for representing the bicycles"
+      },
+      "BicycleTypeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "BicycleType's ID",
+            "format": "int32"
+          },
+          "rentalPrice": {
+            "type": "number",
+            "description": "Rental cost per hour",
+            "format": "double"
+          },
+          "typeName": {
+            "type": "string",
+            "description": "Name of the bicycle type",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO class for representing the type of bicycles"
+      },
+      "BicycleWithTypeNameDto": {
+        "type": "object",
+        "properties": {
+          "serialNumber": {
+            "type": "string",
+            "description": "The serial number of the bicycle.",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "description": "The model of the bicycle.",
+            "nullable": true
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the bicycle.",
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "description": "The type name of the bicycle.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO representing a bicycle with its type name information."
+      },
+      "CustomerDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Customer's ID",
+            "format": "int32"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "Full name of the customer",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "description": "Customer's birth date",
+            "format": "date-time"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Customer's phone number",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO class for representing the customers"
+      },
+      "RentalDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Rental ID",
+            "format": "int32"
+          },
+          "bicycleSerialNumber": {
+            "type": "string",
+            "description": "Bicycle's SerialNumber being rented",
+            "nullable": true
+          },
+          "customerId": {
+            "type": "integer",
+            "description": "Customer ID renting the bicycle",
+            "format": "int32"
+          },
+          "begin": {
+            "type": "string",
+            "description": "Start time of the rental",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "description": "End time of the rental",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO class for representing the rentals"
+      },
+      "TopBicycleDto": {
+        "type": "object",
+        "properties": {
+          "bicycleSerialNumber": {
+            "type": "string",
+            "description": "The serial number of the bicycle",
+            "nullable": true
+          },
+          "model": {
+            "type": "string",
+            "description": "The model of the bicycle.",
+            "nullable": true
+          },
+          "typeName": {
+            "type": "string",
+            "description": "The name of the bicycle type",
+            "nullable": true
+          },
+          "rentalCount": {
+            "type": "integer",
+            "description": "The rental count of the bicycle",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the DTO for top bicycles based on rental activity"
+      },
+      "TopCustomerDto": {
+        "type": "object",
+        "properties": {
+          "customerId": {
+            "type": "integer",
+            "description": "The unique identifier of the customer.",
+            "format": "int32"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "The full name of the customer.",
+            "nullable": true
+          },
+          "rentalCount": {
+            "type": "integer",
+            "description": "The total number of rentals made by the customer.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "DTO representing a top customer based on rental activity."
+      }
+    }
+  }
+}

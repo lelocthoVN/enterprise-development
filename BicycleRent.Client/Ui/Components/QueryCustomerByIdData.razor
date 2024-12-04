@@ -1,0 +1,46 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<div class="container">
+    <div class="form-group">
+        <label for="customerId">Customer ID</label>
+        <InputNumber id="customerId" class="form-control" @bind-Value="CustomerId" />
+    </div>
+
+    <button class="btn btn-outline-light bg-success mt-3" style="width: 180px;" @onclick="FetchCustomer">Get Customer</button>
+    
+    @if (Customer != null)
+    {
+        <div class="mt-3">
+            <h4>Customer Details</h4>
+            <p><strong>ID:</strong> @Customer.Id</p>
+            <p><strong>Name:</strong> @Customer.FullName</p>
+            <p><strong>Birth Date:</strong> @Customer.BirthDate.ToString("d")</p>
+            <p><strong>Phone Number:</strong> @Customer.PhoneNumber</p>
+        </div>
+    }
+    else if (ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-3">
+            @ErrorMessage
+        </div>
+    }
+</div>
+
+@code {
+    private int CustomerId { get; set; }
+    private CustomerDto? Customer { get; set; }
+    private string? ErrorMessage { get; set; }
+
+    private async Task FetchCustomer()
+    {
+        try
+        {
+            ErrorMessage = null;
+            Customer = await BicycleRentApi.GetCustomerById(CustomerId);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"An error occurred: {ex.Message}";
+        }
+    }
+}

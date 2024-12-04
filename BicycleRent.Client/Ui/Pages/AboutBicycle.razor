@@ -1,0 +1,62 @@
+﻿@page "/bicycles"
+
+<PageTitle>About Bicycles - Bicycle Rent</PageTitle>
+
+<h1 class="text-center">Bicycle Management</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <Card>
+                <CardHeader>
+                    <Row Class="justify-content-between">
+                        <Column ColumnSize="ColumnSize.IsAuto">
+                            <h4>About Bicycles</h4>
+                        </Column>
+                    </Row>
+                </CardHeader>
+                <CardBody>
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableRowHeader>
+                                    <Button Color="Color.Primary" Clicked="@(() => AllBicyclesModal.Show())">Execute</Button>
+                                </TableRowHeader>
+                                <TableRowCell>Show all bicycles</TableRowCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowHeader>
+                                    <Button Color="Color.Primary" Clicked="@(() => AvailableBicyclesModal.Show())">Execute</Button>
+                                </TableRowHeader>
+                                <TableRowCell>Show available bicycles</TableRowCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowHeader>
+                                    <Button Color="Color.Primary" Clicked="@(() => BicyclesByTypeModal.Show())">Execute</Button>
+                                </TableRowHeader>
+                                <TableRowCell>Show bicycles by type</TableRowCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowHeader>
+                                    <Button Color="Color.Primary" Clicked="@(() => Top5BicyclesModal.Show())">Execute</Button>
+                                </TableRowHeader>
+                                <TableRowCell>Top five bicycles with the highest rentals</TableRowCell>
+                            </TableRow>                            
+                        </TableBody>
+                    </Table>
+                </CardBody>
+            </Card>
+
+            <QueryBicyclesAllData @ref="AllBicyclesModal" />
+            <QueryAvailableBicyclesData @ref="AvailableBicyclesModal" />
+            <QueryBicyclesByTypeData @ref="BicyclesByTypeModal" />
+            <QueryTopBicyclesData @ref="Top5BicyclesModal" />
+        </div>
+    </div>
+</div>
+
+@code {
+    private QueryBicyclesAllData AllBicyclesModal { get; set; } = new();
+    private QueryAvailableBicyclesData AvailableBicyclesModal { get; set; } = new();
+    private QueryBicyclesByTypeData BicyclesByTypeModal { get; set; } = new();
+    private QueryTopBicyclesData Top5BicyclesModal { get; set; } = new();
+}

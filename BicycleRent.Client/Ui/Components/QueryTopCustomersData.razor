@@ -1,0 +1,52 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<Modal @ref="TopCustomersModal">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle>Top Customers</ModalTitle>
+            <CloseButton Clicked="CloseModalAsync" />
+        </ModalHeader>
+        <ModalBody>
+            <DataGrid TItem="TopCustomerDto"
+                      Data="@TopCustomers"
+                      Responsive
+                      Striped>
+                <DataGridColumns>
+                    <DataGridColumn TItem="TopCustomerDto"
+                                    Field="@nameof(TopCustomerDto.CustomerId)"
+                                    Caption="Customer ID" />
+                    <DataGridColumn TItem="TopCustomerDto"
+                                    Field="@nameof(TopCustomerDto.FullName)"
+                                    Caption="Full Name" />
+                    <DataGridColumn TItem="TopCustomerDto"
+                                    Field="@nameof(TopCustomerDto.RentalCount)"
+                                    Caption="Total Rentals" />
+                </DataGridColumns>
+            </DataGrid>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="CloseModalAsync">Close</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    [Parameter]
+    public EventCallback OnTopCustomersAdded { get; set; }
+
+    private Modal TopCustomersModal { get; set; } = new();
+    private ICollection<TopCustomerDto> TopCustomers { get; set; } = [];
+
+    public async Task Show()
+    {
+        await RefreshData();
+        await TopCustomersModal.Show();
+    }
+
+    private async Task CloseModalAsync() => await TopCustomersModal.Hide();
+
+    private async Task RefreshData()
+    {
+        TopCustomers = await BicycleRentApi.GetTopCustomers();
+    }
+}

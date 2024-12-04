@@ -1,0 +1,32 @@
+﻿@page "/rentals"
+
+<PageTitle>About Rentals - Bicycle Rent</PageTitle>
+
+<h1 class="text-center">Rentals Management</h1>
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4>All Rentals</h4>
+                </div>
+                <div class="card-body">
+                    <QueryAllRentalsData />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4>Delete a Rental</h4>
+                </div>
+                <div class="card-body">
+                    <DeleteRentalByIdForm />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

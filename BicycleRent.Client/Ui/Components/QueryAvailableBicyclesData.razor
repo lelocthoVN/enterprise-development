@@ -1,0 +1,50 @@
+﻿@inject IBicycleRentApiWrapper BicycleRentApi
+
+<Modal @ref="AvailableBicyclesModal">
+    <ModalContent Centered>
+        <ModalHeader>
+            <ModalTitle>Available Bicycles</ModalTitle>
+            <CloseButton Clicked="@(() => AvailableBicyclesModal.Hide())" />
+        </ModalHeader>
+        <ModalBody>
+            <DataGrid TItem="BicycleWithTypeNameDto"
+                      Data="@availableBicyclesList"
+                      Responsive
+                      Striped>
+                <DataGridColumns>
+                    <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                    Field="@nameof(BicycleWithTypeNameDto.SerialNumber)"
+                                    Caption="Serial Number" />
+                    <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                    Field="@nameof(BicycleWithTypeNameDto.Model)"
+                                    Caption="Model" />
+                    <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                    Field="@nameof(BicycleWithTypeNameDto.Color)"
+                                    Caption="Color" />
+                    <DataGridColumn TItem="BicycleWithTypeNameDto"
+                                    Field="@nameof(BicycleWithTypeNameDto.TypeName)"
+                                    Caption="Type" />
+                </DataGridColumns>
+            </DataGrid>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@(() => AvailableBicyclesModal.Hide())">Close</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal AvailableBicyclesModal = new();
+    private ICollection<BicycleWithTypeNameDto> availableBicyclesList = [];
+
+    public async Task Show()
+    {
+        await LoadData();
+        await AvailableBicyclesModal.Show();
+    }
+
+    private async Task LoadData()
+    {
+        availableBicyclesList = await BicycleRentApi.GetAvailableBicycles();
+    }
+}
