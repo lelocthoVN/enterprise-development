@@ -12,7 +12,7 @@
                     <h4>Add a New Customer</h4>
                 </div>
                 <div class="card-body">
-                    <PostCustomerForm OnCustomerAdded="HandleCustomerAdded" />
+                    <PostCustomerForm />
                 </div>
             </div>
         </div>
@@ -48,17 +48,5 @@
 </div>
 
 @code {
-    private string? message;
-
     private QueryTopCustomersData TopCustomersModal { get; set; } = new();
-   
-    private async Task ShowTopCustomers()
-    {
-        await TopCustomersModal.Show();
-    }
-
-    private void HandleCustomerAdded(CustomerDto customer)
-    {
-        message = $"Customer '{customer.FullName}' was added successfully!";
-    }
 }

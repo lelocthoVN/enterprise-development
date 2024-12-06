@@ -1,6 +1,6 @@
 ﻿@inject IBicycleRentApiWrapper BicycleRentApi
 
-<Modal @ref="bicyclesByTypeModal">
+<Modal @ref="BicyclesByTypeModal">
     <ModalContent Centered>
         <ModalHeader>
             <ModalTitle>Bicycles by Type</ModalTitle>
@@ -10,7 +10,7 @@
             <Field>
                 <Select TValue="int" @bind-Value="selectedTypeId" @onchange="OnTypeChanged">
                     <SelectItem Value="0">Select a bicycle type...</SelectItem>
-                    @foreach (var type in bicycleTypes)
+                    @foreach (var type in BicycleTypes)
                     {
                         <SelectItem Value="@type.Id">@type.TypeName</SelectItem>
                     }
@@ -21,10 +21,10 @@
             {
                 <div>Loading...</div>
             }
-            else if (bicyclesByType.Any())
+            else if (BicyclesByType.Any())
             {
                 <DataGrid TItem="BicycleWithTypeNameDto"
-                          Data="@bicyclesByType"
+                          Data="@BicyclesByType"
                           Responsive
                           Striped>
                     <DataGridColumns>
@@ -52,24 +52,24 @@
 </Modal>
 
 @code {
-    private Modal bicyclesByTypeModal { get; set; } = new();
-    private ICollection<BicycleTypeDto> bicycleTypes { get; set; } = [];
-    private ICollection<BicycleWithTypeNameDto> bicyclesByType { get; set; } = []; 
-    private int selectedTypeId { get; set; } = 0;
-    private bool isLoading { get; set; } = false;
+    private Modal BicyclesByTypeModal { get; set; } = new();
+    private ICollection<BicycleTypeDto> BicycleTypes { get; set; } = [];
+    private ICollection<BicycleWithTypeNameDto> BicyclesByType { get; set; } = []; 
+    private int selectedTypeId = 0;
+    private bool isLoading = false;
 
     public async Task Show()
     {
         await LoadBicycleTypes(); 
-        await bicyclesByTypeModal.Show();
+        await BicyclesByTypeModal.Show();
     }
 
     private async Task LoadBicycleTypes()
     {
         try
         {
-            bicycleTypes = await BicycleRentApi.GetAllBicycleTypes();
-            if (bicycleTypes.Any())
+            BicycleTypes = await BicycleRentApi.GetAllBicycleTypes();
+            if (BicycleTypes.Any())
             {
                 selectedTypeId = 0;
             }
@@ -101,7 +101,7 @@
             {
                 isLoading = true;
                 StateHasChanged();
-                bicyclesByType = await BicycleRentApi.GetBicyclesByType(selectedTypeId);
+                BicyclesByType = await BicycleRentApi.GetBicyclesByType(selectedTypeId);
                 isLoading = false;
                 StateHasChanged();
             }
@@ -116,6 +116,6 @@
             Console.WriteLine("No type selected");
         }
     }
-    private async Task CloseModalAsync() => await bicyclesByTypeModal.Hide();
+    private async Task CloseModalAsync() => await BicyclesByTypeModal.Hide();
 }
 

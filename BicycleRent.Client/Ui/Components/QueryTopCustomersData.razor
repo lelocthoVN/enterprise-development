@@ -1,6 +1,6 @@
 ﻿@inject IBicycleRentApiWrapper BicycleRentApi
 
-<Modal @ref="topCustomersModal">
+<Modal @ref="TopCustomersModal">
     <ModalContent Centered>
         <ModalHeader>
             <ModalTitle>Top Customers</ModalTitle>
@@ -8,7 +8,7 @@
         </ModalHeader>
         <ModalBody>
             <DataGrid TItem="TopCustomerDto"
-                      Data="@topCustomersList"
+                      Data="@TopCustomersList"
                       Responsive
                       Striped>
                 <DataGridColumns>
@@ -32,21 +32,21 @@
 
 @code {
     [Parameter]
-    public EventCallback onTopCustomersAdded { get; set; }
+    public EventCallback OnTopCustomersAdded { get; set; }
 
-    private Modal topCustomersModal { get; set; } = new();
-    private ICollection<TopCustomerDto> topCustomersList { get; set; } = [];
+    private Modal TopCustomersModal { get; set; } = new();
+    private ICollection<TopCustomerDto> TopCustomersList { get; set; } = [];
 
     public async Task Show()
     {
         await RefreshData();
-        await topCustomersModal.Show();
+        await TopCustomersModal.Show();
     }
 
-    private async Task CloseModalAsync() => await topCustomersModal.Hide();
+    private async Task CloseModalAsync() => await TopCustomersModal.Hide();
 
     private async Task RefreshData()
     {
-        topCustomersList = await BicycleRentApi.GetTopCustomers();
+        TopCustomersList = await BicycleRentApi.GetTopCustomers();
     }
 }
